@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorSecondary500</item>
+        <item name="colorPrimaryDark">@color/colorSecondary700</item>
+        <item name="colorPrimaryVariant">@color/colorSecondary700</item>
+
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="colorSecondary">@color/colorPrimary200</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary500</item>
+
+        <item name="android:colorBackground">@color/lightDark</item>
+        <item name="colorSurface">@color/lightDark</item>
+        <item name="colorError">@color/colorErrorAlternateNight</item>
+
+        <item name="colorOnPrimary">@color/lightWhite</item>
+        <item name="colorOnSecondary">@color/lightDark</item>
+        <item name="colorOnBackground">@color/lightWhite</item>
+        <item name="colorOnSurface">@color/lightWhite</item>
+        <item name="colorOnError">@color/lightWhite</item>
+
+        <item name="toolbarStyle">@style/MyToolBarStyle</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/colorAccent</item>
+        <item name="actionModeCloseDrawable">@drawable/back</item>
+        <item name="actionModeStyle">@style/MyActionModeStyle</item>
+        <item name="spinnerStyle">@style/MySpinnerStyle</item>
+        <item name="materialButtonStyle">@style/MyMaterialButtonStyle</item>
+
+        <item name="preferenceTheme">@style/MyPreferenceThemeOverlay</item>
+    </style>
+    <!--a sample toolbar styling, choose parent with care -->
+    <!--    your AppTheme inheriting from MaterialComponents but toolbar inheriting from platform theme-->
+    <!--    may case weird visual effects-->
+    <style name="MyToolBarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">@color/lightWhite</item>
+        <item name="subtitleTextColor">@color/lightWhite</item>
+        <item name="android:background">@color/lightDark</item>
+    </style>
+
+    <style name="MyActionModeStyle" parent="Widget.AppCompat.ActionMode">
+        <item name="titleTextStyle">@style/MyActionModeTitleTextAppearance</item>
+    </style>
+
+    <style name="MyActionModeTitleTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionMode.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/lightWhite</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.MaterialComponents">
+        <item name="android:actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+    </style>
+
+    <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="android:tint">@color/lightWhite</item>
+    </style>
+
+    <style name="PopupOverlay" parent="ThemeOverlay.MaterialComponents" />
+
+    <style name="SplashTheme" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_drawable</item>
+    </style>
+
+    <style name="MySpinnerStyle" parent="Widget.AppCompat.Spinner.Underlined">
+        <item name="background">?attr/colorSurface</item>
+    </style>
+
+</resources>

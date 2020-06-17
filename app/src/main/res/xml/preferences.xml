@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreferenceCompat
+        app:defaultValue="false"
+        app:key="@string/key_night_mode"
+        app:summaryOff="@string/summary_night_mode_off"
+        app:summaryOn="@string/summary_night_mode_on"
+        app:title="@string/title_night_mode" />
+    <Preference
+        app:key="@string/key_reminder_tone"
+        app:title="@string/title_ringtone" />
+    <Preference
+        app:allowDividerAbove="true"
+        app:key="@string/key_about_dev"
+        app:summary="@string/summary_about_dev"
+        app:title="@string/title_about_dev" />
+</PreferenceScreen>
