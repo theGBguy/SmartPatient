@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="90dp"
+    app:cardCornerRadius="8dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    app:rippleColor="?attr/colorPrimary"
+    tools:showIn="@layout/fragment_nearby">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bottom_sheet_rcview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:itemCount="2"
+        tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+</com.google.android.material.card.MaterialCardView>
