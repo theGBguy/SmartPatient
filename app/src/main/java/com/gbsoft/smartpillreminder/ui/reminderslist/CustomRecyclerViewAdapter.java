@@ -1,8 +1,8 @@
 package com.gbsoft.smartpillreminder.ui.reminderslist;
 
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,8 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +36,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import timber.log.Timber;
 
 public class CustomRecyclerViewAdapter extends ChoiceCapableAdapter<CustomRecyclerViewAdapter.CustomViewHolder> {
 
@@ -130,27 +132,17 @@ public class CustomRecyclerViewAdapter extends ChoiceCapableAdapter<CustomRecycl
             switch (id) {
                 case R.id.menu_action_edit:
                     final int[] recViewPos = new int[1];
-                    adapter.visitChecks(new ChoiceMode.Visitor() {
-                        @Override
-                        public void onSelectedPosition(int position) {
-                            recViewPos[0] = position;
-                        }
-                    });
-                    adapter.context.get().requireParentFragment().requireActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(android.R.id.content, AddOrUpdateReminderFragment.newInstance(currentList.get(recViewPos[0])))
-                            .addToBackStack(null)
-                            .commit();
+                    adapter.visitChecks(position -> recViewPos[0] = position);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(AddOrUpdateReminderFragment.KEY_REMINDER_TO_BE_UPDATED, currentList.get(recViewPos[0]));
+                    Navigation.findNavController(adapter.context.get().requireView())
+                            .navigate(R.id.action_navigation_home_to_addOrUpdateReminderFragment, bundle, null, null);
                     adapter.clearSelections();
                     adapter.actionMode.finish();
                     break;
                 case R.id.menu_action_delete:
                     final List<Integer> positionList = new ArrayList<>();
-                    adapter.visitChecks(new ChoiceMode.Visitor() {
-                        @Override
-                        public void onSelectedPosition(int position) {
-                            positionList.add(position);
-                        }
-                    });
+                    adapter.visitChecks(positionList::add);
                     Collections.sort(positionList, Collections.reverseOrder());
                     ReminderViewModel reminderViewModel = new ViewModelProvider(adapter.context.get()).get(ReminderViewModel.class);
                     Helper.ReminderHelper reminderHelper = new Helper.ReminderHelper(adapter.context.get().requireContext());
@@ -172,12 +164,9 @@ public class CustomRecyclerViewAdapter extends ChoiceCapableAdapter<CustomRecycl
         public void onDestroyActionMode(ActionMode mode) {
             final CustomRecyclerViewAdapter adapter = customRecyclerViewAdapterWeakReference.get();
             if (adapter.actionMode != null) {
-                adapter.visitChecks(new ChoiceMode.Visitor() {
-                    @Override
-                    public void onSelectedPosition(int position) {
-                        adapter.setSelected(position, false);
-                        adapter.notifyItemChanged(position);
-                    }
+                adapter.visitChecks(position -> {
+                    adapter.setSelected(position, false);
+                    adapter.notifyItemChanged(position);
                 });
                 adapter.actionMode = null;
             }
@@ -194,46 +183,38 @@ public class CustomRecyclerViewAdapter extends ChoiceCapableAdapter<CustomRecycl
         private TextView tvMedName, tvTimeToRemind, tvRemaining, tvBar;
         private ProgressBar pgbarImgLoading;
         private ShapeableImageView ivMedicine;
-        private ConstraintLayout constraintLayout;
         private CustomRecyclerViewAdapter adapter;
 
         CustomViewHolder(@NonNull final View itemView, final CustomRecyclerViewAdapter adapter) {
             super(itemView);
-            com.gbsoft.smartpillreminder.databinding.ReminderRowBinding binding = ReminderRowBinding.bind(itemView);
+            ReminderRowBinding binding = ReminderRowBinding.bind(itemView);
             this.adapter = adapter;
-            tvMedName = binding.tvMedName;
-            tvTimeToRemind = binding.tvTimeToRemind;
-            tvRemaining = binding.tvRemaining;
-            tvBar = binding.textViewBar;
-            ivMedicine = binding.ivMedicine;
-            pgbarImgLoading = binding.pgbarImgLoading;
+            tvMedName = binding.rrTvMedName;
+            tvTimeToRemind = binding.rrTvTimeToRemind;
+            tvRemaining = binding.rrTvRemaining;
+            tvBar = binding.rrTvBar;
+            ivMedicine = binding.rrIvMed;
+            pgbarImgLoading = binding.rrPgbarImgLoading;
 
             reminderRowCard = binding.reminderRowCard;
-            constraintLayout = binding.reminderRowConstraintLayout;
 
-            reminderRowCard.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    boolean isSelected = adapter.isSelected(getAdapterPosition());
-                    if (!isSelected) {
-                        adapter.setSelected(getAdapterPosition(), true);
-                        ((MaterialCardView) v).setChecked(true);
-                        ivMedicine.setAlpha(0.5f);
-                    }
-                    return true;
+            reminderRowCard.setOnLongClickListener(v -> {
+                boolean isSelected = adapter.isSelected(getAdapterPosition());
+                if (!isSelected) {
+                    adapter.setSelected(getAdapterPosition(), true);
+                    ((MaterialCardView) v).setChecked(true);
+                    ivMedicine.setAlpha(0.5f);
                 }
+                return true;
             });
 
-            reminderRowCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(getClass().getSimpleName(), String.valueOf(adapter.getSelectedCount()));
-                    if (adapter.getSelectedCount() > 0) {
-                        boolean isSelected = adapter.isSelected(getAdapterPosition());
-                        adapter.setSelected(getAdapterPosition(), !isSelected);
-                        ((MaterialCardView) v).setChecked(!isSelected);
-                        ivMedicine.setAlpha(!isSelected ? 0.5f : 1f);
-                    }
+            reminderRowCard.setOnClickListener(v -> {
+                Timber.d(String.valueOf(adapter.getSelectedCount()));
+                if (adapter.getSelectedCount() > 0) {
+                    boolean isSelected = adapter.isSelected(getAdapterPosition());
+                    adapter.setSelected(getAdapterPosition(), !isSelected);
+                    ((MaterialCardView) v).setChecked(!isSelected);
+                    ivMedicine.setAlpha(!isSelected ? 0.5f : 1f);
                 }
             });
         }
@@ -244,7 +225,7 @@ public class CustomRecyclerViewAdapter extends ChoiceCapableAdapter<CustomRecycl
                 new Handler().postDelayed(new PhotoLoader(reminder.getImagePath(),
                         ivMedicine, pgbarImgLoading), 2000);
             }
-            constraintLayout.setSelected(adapter.isSelected(getAdapterPosition()));
+            reminderRowCard.setSelected(adapter.isSelected(getAdapterPosition()));
             tvTimeToRemind.setText(new Helper.TimeHelper().formatTime(reminder.getReminderTime()));
             if ((reminder.getReminderType().equals("Pending"))) {
                 tvRemaining.setText(new Helper.TimeHelper().calculateTimeDiff(reminder.getReminderTime()));

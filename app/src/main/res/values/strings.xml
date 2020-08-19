@@ -1,18 +1,21 @@
 <resources>
     <string name="app_name">Smart Pill Reminder</string>
-    <string name="add_reminder_fragment_name">Add a new reminder</string>
-    <string name="update_reminder_fragment_name">Update reminder for</string>
-    <string name="reminder_list_fragment_name">Reminder List</string>
 
-    <string name="tab_text_1">Pending</string>
-    <string name="tab_text_2">Completed</string>
-    <string name="tab_text_3">Missed</string>
+    <!--    string resources for the MainActivity-->
 
-    <!--    string resources for textview text-->
-    <string name="tvTotalProgress_text">Total Progress</string>
+    <!--    fragments name-->
+    <string name="add_reminder_fragment_label">Add a new reminder</string>
+    <string name="update_reminder_fragment_label">Update reminder for</string>
+    <string name="reminder_list_fragment_label">Reminder List</string>
+    <string name="fragment_home_label">Home</string>
+    <string name="fragment_settings_label">Settings</string>
+    <string name="fragment_nearby_label">Hospitals</string>
 
-    <!--    string resources used in fragment_main-->
-    <string name="extendedFAB_text">Add a new reminder</string>
+    <!--    string resources used in fragment_home-->
+    <string name="home_extendedFAB_text">Add a new reminder</string>
+
+    <!--    string resources used in fragment_nearby-->
+    <string name="nearby_extendedFAB_text">Search near you</string>
 
     <!--    string resources used in fragment_add_update_reminder-->
     <string name="edtTxtMedName_hint">Medicine Name </string>
@@ -20,39 +23,18 @@
     <string name="tvSetReminderTime_text">Set Reminder Time</string>
     <string name="edtTxtDailyIntake_hint">Daily intake </string>
     <string name="btnAddMedImg_text">Capture Medicine Image</string>
-    <string name="fragment_title_text">Add a new reminder</string>
     <string name="fragment_add_button_text">Add</string>
     <string name="fragment_update_button_text">Update</string>
     <string name="fragment_cancel_button_text">Cancel</string>
-
-    <!--    string resources used in settings fragment-->
-    <string name="fragment_title_settings">Settings</string>
 
     <!--    string resources for menu_action and menu_main-->
     <string name="menu_action_edit">Edit</string>
     <string name="menu_action_delete">Delete</string>
     <string name="menu_action_title">%1$d item%2$s selected</string>
 
-    <string name="menu_main_settings">Settings</string>
-    <string name="menu_main_developer">Developer Info</string>
-
     <!--    string resources for reminder_row-->
     <string name="tvTimeToRemind_placeholder_text">%1$d:%2$d %3$s</string>
     <string name="tvMedName_placeholder_text">%1$s (%2$d times a day)</string>
-
-    <!--    string resources for reminder_activity-->
-    <string name="chip_group_title">Suggestions</string>
-    <string name="btnStopAlarm_text">Stop Reminder</string>
-    <string name="btnSetAlarmSixHoursLater_text">Remind again 6 hrs later</string>
-    <string name="btnSetAlarmCustomHoursLater_text">Remind again custom time later</string>
-
-    <!--    string resources related to notification-->
-    <string name="notif_channel_id">SPR_Channel_ID</string>
-    <string name="notif_channel_name">Smart Pill Reminder</string>
-    <string name="notif_channel_desc">This notification channel is used to notify the user about the missed reminders.</string>
-
-    <string name="notif_missed_title">Reminder Missed!!</string>
-    <string name="notif_content">A reminder to take medicine set for %1$s is missed.</string>
 
     <!--    string resources for the container transition-->
     <string name="from_main_to_addUpdate">shared_element_transition_1</string>
@@ -71,11 +53,37 @@
     <string name="summary_night_mode_off">Off</string>
     <string name="summary_about_dev">Developed in co-ordination with Fantastic-4</string>
 
+    <!--    mapbox access token-->
+    <string name="mapbox_access_token">pk.eyJ1IjoiZ2J6bWFwYm94IiwiYSI6ImNrYnc2MDJqYjBjd2kzNG5zaHcza202cHcifQ.GA9ufT4xgnIB6kw9XSvWRA</string>
+
+    <!--    different array resources-->
+    <!--    array for spinner to show different medicine types-->
     <string-array name="spinner_med_type_array_res">
         <item>Choose One</item>
         <item>Pill</item>
         <item>Oral Suspension</item>
         <item>Injection</item>
     </string-array>
+
+    <!--    array used in showing different tabs label for different reminder type-->
+    <string-array name="reminder_type_array_res">
+        <item name="tab_text_1">Pending</item>
+        <item name="tab_text_2">Completed</item>
+        <item name="tab_text_3">Missed</item>
+    </string-array>
+
+    <!--    string resources for reminder_activity-->
+    <string name="chip_group_title">Suggestions</string>
+    <string name="btnStopAlarm_text">Stop Reminder</string>
+    <string name="btnSetAlarmSixHoursLater_text">Remind again 6 hrs later</string>
+    <string name="btnSetAlarmCustomHoursLater_text">Remind again custom time later</string>
+
+    <!--    string resources related to notification-->
+    <string name="notif_channel_id">SPR_Channel_ID</string>
+    <string name="notif_channel_name">Smart Pill Reminder</string>
+    <string name="notif_channel_desc">This notification channel is used to notify the user about the missed reminders.</string>
+
+    <string name="notif_missed_title">Reminder Missed!!</string>
+    <string name="notif_content">A reminder to take medicine set for %1$s is missed.</string>
 
 </resources>

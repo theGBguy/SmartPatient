@@ -7,11 +7,18 @@ import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.mapbox.mapboxsdk.Mapbox;
+
+import timber.log.Timber;
+
 public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
 
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean nightMode = sharedPreferences.getBoolean(getString(R.string.key_night_mode), false);
         if (nightMode)
@@ -22,5 +29,7 @@ public class MyApplication extends Application {
             else
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
+
+        Mapbox.getInstance(getApplicationContext(), getString(R.string.mapbox_access_token));
     }
 }

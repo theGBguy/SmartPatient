@@ -26,9 +26,14 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeBackground">@color/colorAccent</item>
         <item name="actionModeCloseDrawable">@drawable/back</item>
+        <item name="drawerArrowStyle">@style/DrawerArrayStyle</item>
         <item name="actionModeStyle">@style/MyActionModeStyle</item>
         <item name="spinnerStyle">@style/MySpinnerStyle</item>
-        <item name="materialButtonStyle">@style/MyMaterialButtonStyle</item>
+        <item name="materialAlertDialogTheme">@style/CustomDialogStyle</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/SmallComponentStyle</item>
+        <item name="shapeAppearanceMediumComponent">@style/MediumComponentStyle</item>
+        <item name="shapeAppearanceLargeComponent">@style/LargeComponentStyle</item>
 
         <item name="preferenceTheme">@style/MyPreferenceThemeOverlay</item>
     </style>
@@ -67,10 +72,6 @@
 
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_drawable</item>
-    </style>
-
-    <style name="MySpinnerStyle" parent="Widget.AppCompat.Spinner.Underlined">
-        <item name="background">?attr/colorSurface</item>
     </style>
 
 </resources>

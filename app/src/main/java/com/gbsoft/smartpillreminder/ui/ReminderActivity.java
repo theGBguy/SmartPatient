@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -77,7 +76,7 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
                 ShapeableImageView ivMedImg = binding.ivMedImg;
                 Drawable imgReminder = new Helper.ImageHelper().getDrawableFromPath(this, reminder.getImagePath(), 300, 300);
                 ivMedImg.setImageDrawable(imgReminder);
-                TextView tvMedName = binding.tvMedicineName;
+                TextView tvMedName = binding.tvMedName;
                 tvMedName.setText(reminder.getMedicineName());
             }
         }
@@ -125,7 +124,7 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (reminder != null) {
             switch (v.getId()) {
-                case R.id.btnSetReminderSixHoursLater:
+                case R.id.btn_set_reminder_six_hours_later:
                     Reminder newer = new Reminder(reminder);
                     newer.setId(System.currentTimeMillis());
                     newer.setReminderType("Pending");
@@ -137,27 +136,24 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
                     isMissed = false;
                     finish();
                     break;
-                case R.id.btnSetReminderCustomTimeLater:
-                    TimePickerDialog dialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            Reminder newer = new Reminder(reminder);
-                            newer.setId(System.currentTimeMillis());
-                            newer.setReminderType("Pending");
-                            newer.setReminderTime(hourOfDay + ":" + minute);
-                            reminderViewModel.insertAReminder(newer);
-                            reminderHelper.scheduleReminder(newer, false);
-                            reminder.setReminderType("Completed");
-                            reminderViewModel.updateAReminder(reminder);
-                            isMissed = false;
-                            finish();
-                        }
+                case R.id.btn_set_reminder_custom_time_later:
+                    TimePickerDialog dialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
+                        Reminder newer1 = new Reminder(reminder);
+                        newer1.setId(System.currentTimeMillis());
+                        newer1.setReminderType("Pending");
+                        newer1.setReminderTime(hourOfDay + ":" + minute);
+                        reminderViewModel.insertAReminder(newer1);
+                        reminderHelper.scheduleReminder(newer1, false);
+                        reminder.setReminderType("Completed");
+                        reminderViewModel.updateAReminder(reminder);
+                        isMissed = false;
+                        finish();
                     }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
                             , Calendar.getInstance().get(Calendar.MINUTE)
                             , false);
                     dialog.show();
                     break;
-                case R.id.btnStopReminder:
+                case R.id.btn_stop_reminder:
                     reminder.setReminderType("Completed");
                     reminderViewModel.updateAReminder(reminder);
                     isMissed = false;

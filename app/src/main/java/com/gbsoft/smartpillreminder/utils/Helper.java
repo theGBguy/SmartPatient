@@ -1,5 +1,6 @@
 package com.gbsoft.smartpillreminder.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -24,7 +25,6 @@ import androidx.core.content.ContextCompat;
 import com.gbsoft.smartpillreminder.R;
 import com.gbsoft.smartpillreminder.model.Reminder;
 import com.gbsoft.smartpillreminder.ui.ReminderActivity;
-import com.gbsoft.smartpillreminder.ui.main.MainFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Calendar;
@@ -178,19 +178,15 @@ public class Helper {
         }
 
         public void scheduleReminder(Reminder Reminder, boolean isUpdate) {
-            if (MainFragment.PERMISSION_GRANTED) {
-                if (isUpdate) {
-                    cancelReminder(Reminder);
-                    Log.d(LOG_TAG, "The existing reminder has been rescheduled successfully!");
-                } else
-                    Log.d(LOG_TAG, "A new reminder has been scheduled successfully!");
-                reminderManager.setWindow(AlarmManager.RTC_WAKEUP,
-                        System.currentTimeMillis() + timeHelper.getRemainingTimeInLongMillis(Reminder.getReminderTime()),
-                        15000,
-                        getPendingIntent(Reminder, PendingIntent.FLAG_UPDATE_CURRENT));
-            } else {
-                Log.d(LOG_TAG, "The reminder couldn't be scheduled because of permission related problem");
-            }
+            if (isUpdate) {
+                cancelReminder(Reminder);
+                Log.d(LOG_TAG, "The existing reminder has been rescheduled successfully!");
+            } else
+                Log.d(LOG_TAG, "A new reminder has been scheduled successfully!");
+            reminderManager.setWindow(AlarmManager.RTC_WAKEUP,
+                    System.currentTimeMillis() + timeHelper.getRemainingTimeInLongMillis(Reminder.getReminderTime()),
+                    15000,
+                    getPendingIntent(Reminder, PendingIntent.FLAG_UPDATE_CURRENT));
         }
 
         public void cancelReminder(Reminder Reminder) {
@@ -211,31 +207,6 @@ public class Helper {
             return PendingIntent.getActivity(context, (int) Reminder.getId(), intent, flag);
         }
 
-    }
-
-    public static class PermissionHelper {
-
-        public boolean checkPermission(Activity activity, String permission) {
-            if (ContextCompat.checkSelfPermission(activity.getBaseContext(), permission) != PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
-                    showPermissionRequestDialog(activity);
-                } else {
-                    ActivityCompat.requestPermissions(activity, new String[]{permission}, 102);
-                }
-            } else
-                return true;
-            return ContextCompat.checkSelfPermission(activity.getBaseContext(), permission) == PackageManager.PERMISSION_GRANTED;
-        }
-
-        private void showPermissionRequestDialog(Activity activity) {
-            AlertDialog dialog;
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity.getBaseContext());
-            builder.setIcon(R.drawable.info);
-            builder.setTitle("Permission Request!");
-            builder.setMessage("Please, grant us the permission so that app can work as expected.");
-            dialog = builder.create();
-            dialog.show();
-        }
     }
 
     public static class ImageHelper {

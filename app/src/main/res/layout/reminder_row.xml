@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/reminderRowCard"
+    android:id="@+id/reminder_row_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -17,12 +17,12 @@
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/reminderRowConstraintLayout"
+        android:id="@+id/reminder_row_const_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivMedicine"
+            android:id="@+id/rr_iv_med"
             android:layout_width="match_parent"
             android:layout_height="173dp"
             android:layout_margin="4dp"
@@ -31,8 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/MyShapeableImageViewShapeAppearance" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,10 +42,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivMedicine">
+            app:layout_constraintTop_toBottomOf="@+id/rr_iv_med">
 
             <TextView
-                android:id="@+id/tvMedName"
+                android:id="@+id/rr_tv_med_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -60,7 +59,7 @@
                 tools:text="Paracetamol" />
 
             <TextView
-                android:id="@+id/tvTimeToRemind"
+                android:id="@+id/rr_tv_time_to_remind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -71,11 +70,11 @@
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMedName"
+                app:layout_constraintTop_toBottomOf="@+id/rr_tv_med_name"
                 tools:text="6:30 pm" />
 
             <TextView
-                android:id="@+id/tvRemaining"
+                android:id="@+id/rr_tv_remaining"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -85,13 +84,13 @@
                 android:drawablePadding="2dp"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textViewBar"
-                app:layout_constraintTop_toBottomOf="@+id/tvMedName"
+                app:layout_constraintStart_toEndOf="@+id/rr_tv_bar"
+                app:layout_constraintTop_toBottomOf="@+id/rr_tv_med_name"
                 app:layout_constraintVertical_bias="0.0"
                 tools:text="5 mins remaining" />
 
             <TextView
-                android:id="@+id/textViewBar"
+                android:id="@+id/rr_tv_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -99,20 +98,20 @@
                 android:layout_marginBottom="16dp"
                 android:text="|"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvTimeToRemind"
-                app:layout_constraintTop_toBottomOf="@+id/tvMedName" />
+                app:layout_constraintStart_toEndOf="@+id/rr_tv_time_to_remind"
+                app:layout_constraintTop_toBottomOf="@+id/rr_tv_med_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
-            android:id="@+id/pgbarImgLoading"
+            android:id="@+id/rr_pgbar_img_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminateTint="?attr/colorOnSurface"
-            app:layout_constraintBottom_toBottomOf="@+id/ivMedicine"
+            app:layout_constraintBottom_toBottomOf="@+id/rr_iv_med"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ivMedicine" />
+            app:layout_constraintTop_toTopOf="@+id/rr_iv_med" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

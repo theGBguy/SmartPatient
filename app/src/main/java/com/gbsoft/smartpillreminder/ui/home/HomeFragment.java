@@ -1,66 +1,67 @@
-package com.gbsoft.smartpillreminder.ui.main;
+package com.gbsoft.smartpillreminder.ui.home;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
+import androidx.navigation.ui.NavigationUI;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.gbsoft.smartpillreminder.R;
-import com.gbsoft.smartpillreminder.databinding.FragmentMainBinding;
-import com.gbsoft.smartpillreminder.ui.addorupdate.AddOrUpdateReminderFragment;
-import com.gbsoft.smartpillreminder.ui.settings.SettingsFragment;
-import com.gbsoft.smartpillreminder.utils.Helper;
+import com.gbsoft.smartpillreminder.databinding.FragmentHomeBinding;
+import com.gbsoft.smartpillreminder.ui.MainActivity;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.transition.Hold;
-import com.google.android.material.transition.MaterialFade;
 
 import java.util.Objects;
 
-public class MainFragment extends Fragment implements View.OnClickListener {
-    public static boolean PERMISSION_GRANTED = true;
+public class HomeFragment extends Fragment implements View.OnClickListener {
+
     private ExtendedFloatingActionButton fab;
-    private FragmentMainBinding binding;
+    private FragmentHomeBinding binding;
+    private TabLayoutMediator mediator;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentMainBinding.inflate(inflater, container, false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Toolbar toolbar = binding.toolbar;
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.homeToolbar);
+        NavigationUI.setupWithNavController(binding.homeToolbar, Navigation.findNavController(requireView()),
+                ((MainActivity) requireActivity()).getAppBarConfig());
 
-        TabViewPagerAdapter tabViewPagerAdapter = new TabViewPagerAdapter(getContext(), getChildFragmentManager());
-        ViewPager viewPager = binding.viewPager;
-        viewPager.setAdapter(tabViewPagerAdapter);
-        TabLayout tabs = binding.tabs;
-        tabs.setupWithViewPager(viewPager);
+        TabViewFragmentStateAdapter tabViewFragmentStateAdapter = new TabViewFragmentStateAdapter(getChildFragmentManager(),
+                getViewLifecycleOwner().getLifecycle());
+        ViewPager2 viewPager2 = binding.homeViewPager;
+        viewPager2.setAdapter(tabViewFragmentStateAdapter);
+
+        TabLayout tabs = binding.homeTabs;
+        final String[] reminderTypeArray = getResources().getStringArray(R.array.reminder_type_array_res);
+        mediator = new TabLayoutMediator(tabs, viewPager2, (tab, position) -> tab.setText(reminderTypeArray[position]));
+        mediator.attach();
+
         Objects.requireNonNull(tabs.getTabAt(0)).select();
-        checkForAllPermissions();
 
-        fab = binding.fab;
+        fab = binding.homeFab;
         fab.setOnClickListener(this);
 
         final AnimatedVectorDrawableCompat pendingReminder = AnimatedVectorDrawableCompat.create(requireContext(), R.drawable.pending_reminder);
@@ -101,53 +102,24 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.fab) {
+        if (v.getId() == R.id.home_fab) {
             setExitTransition(new Hold());
-            AddOrUpdateReminderFragment fragment = new AddOrUpdateReminderFragment();
-            String BACKSTACK_NAME = "main_to_addOrUpdate";
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .addSharedElement(fab, getString(R.string.from_main_to_addUpdate))
-                    .replace(android.R.id.content, fragment)
-                    .addToBackStack(BACKSTACK_NAME)
-                    .commit();
-        }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_settings) {
-            setExitTransition(new MaterialFade());
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
-                            android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    .replace(android.R.id.content, new SettingsFragment())
-                    .addToBackStack(null)
-                    .commit();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void checkForAllPermissions() {
-        Helper.PermissionHelper helper = new Helper.PermissionHelper();
-        String[] permissionArr = new String[]{Manifest.permission.WAKE_LOCK, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        for (String permission : permissionArr) {
-            PERMISSION_GRANTED = PERMISSION_GRANTED && helper.checkPermission(requireActivity(), permission);
+            FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
+                    .addSharedElement(fab, getString(R.string.from_main_to_addUpdate)).build();
+            Navigation.findNavController(v).navigate(R.id.addOrUpdateReminderFragment, null, null, extras);
         }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        mediator.detach();
+        mediator = null;
         fab = null;
         binding = null;
     }

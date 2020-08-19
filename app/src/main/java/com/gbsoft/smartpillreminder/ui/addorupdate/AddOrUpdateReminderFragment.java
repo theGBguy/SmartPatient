@@ -4,11 +4,11 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,23 +16,28 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.gbsoft.smartpillreminder.R;
 import com.gbsoft.smartpillreminder.databinding.FragmentAddUpdateReminderBinding;
 import com.gbsoft.smartpillreminder.model.Reminder;
 import com.gbsoft.smartpillreminder.room.ReminderViewModel;
+import com.gbsoft.smartpillreminder.ui.MainActivity;
 import com.gbsoft.smartpillreminder.utils.Helper;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.MaterialArcMotion;
@@ -46,8 +51,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+import timber.log.Timber;
+
 public class AddOrUpdateReminderFragment extends Fragment implements View.OnClickListener {
-    private static final String KEY_REMINDER_TO_BE_UPDATED = "keyReminderToBeUpdated";
+    public static final String KEY_REMINDER_TO_BE_UPDATED = "keyReminderToBeUpdated";
     private String newPhotoPath = "", oldPhotoPath = "", medicineType = "", reminderTime = "";
 
     private static final int IMG_CAPTURE_REQUEST_CODE = 1000;
@@ -60,21 +67,14 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
 
     private FragmentAddUpdateReminderBinding binding;
 
-    public static AddOrUpdateReminderFragment newInstance(Reminder reminderToBeUpdated) {
-        AddOrUpdateReminderFragment fragment = new AddOrUpdateReminderFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_REMINDER_TO_BE_UPDATED, reminderToBeUpdated);
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             reminderToBeUpdated = getArguments().getParcelable(KEY_REMINDER_TO_BE_UPDATED);
         }
         reminderViewModel = new ViewModelProvider(this).get(ReminderViewModel.class);
-        super.onCreate(savedInstanceState);
 
         int color = 0;
         TypedValue a = new TypedValue();
@@ -82,6 +82,7 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
         if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
             color = a.data;
         }
+
         MaterialContainerTransform transform = new MaterialContainerTransform();
         transform.setDuration(650);
         transform.setContainerColor(color != 0 ? color : getResources().getColor(R.color.lightWhite));
@@ -116,9 +117,9 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
         if (requestCode == IMG_CAPTURE_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 if (!oldPhotoPath.equals("")) {
-                    Log.d("CustomAlertDialog", "old photo is being deleted");
+                    Timber.d("old photo is being deleted");
                     if (new File(oldPhotoPath).delete())
-                        Log.d("AddUpdateFragment", "old photo is cleared.");
+                        Timber.d("old photo is cleared.");
                     oldPhotoPath = "";
                 }
                 Snackbar.make(requireView(), "Image of Reminder is stored successfully", Snackbar.LENGTH_LONG).show();
@@ -128,9 +129,9 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
                 btnCaptureMedPic.setText(new File(newPhotoPath).getName());
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 if (!newPhotoPath.equals("")) {
-                    Log.d("custom_alert_dialog", "new photo is being deleted");
+                    Timber.d("new photo is being deleted");
                     if (new File(newPhotoPath).delete())
-                        Log.d("AddUpdateFragment", "new photo is cleared.");
+                        Timber.d("new photo is cleared.");
                     newPhotoPath = "";
                 }
             }
@@ -153,19 +154,13 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
-        final Toolbar toolbar = binding.toolbarAddReminder;
+        final MaterialToolbar toolbar = binding.addUpdateToolbar;
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireActivity().getSupportFragmentManager().popBackStackImmediate();
-            }
-        });
+        NavigationUI.setupWithNavController(binding.addUpdateToolbar, Navigation.findNavController(requireView()),
+                ((MainActivity) requireActivity()).getAppBarConfig());
 
-
-        edtTxtMedName = binding.edtTxtMedName;
-        edtTxtDailyIntake = binding.edtTxtDailyIntake;
+        edtTxtMedName = binding.etMedName;
+        edtTxtDailyIntake = binding.etDailyIntake;
         btnCaptureMedPic = binding.btnAddMedImg;
 
         btnCaptureMedPic.setOnClickListener(this);
@@ -173,7 +168,7 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
         btnAddOrUpdate.setOnClickListener(this);
         binding.btnCancel.setOnClickListener(this);
 
-        final Spinner spinnerMedType = binding.spinnerMedType;
+        final Spinner spinnerMedType = binding.spnrMedType;
 
         spinnerMedType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -190,7 +185,7 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
         btnSetReminderTime.setOnClickListener(this);
 
         if (reminderToBeUpdated != null) {
-            toolbar.setTitle(R.string.update_reminder_fragment_name);
+            toolbar.setTitle(R.string.update_reminder_fragment_label);
             toolbar.setSubtitle("\"" + reminderToBeUpdated.getMedicineName() + "\"");
             edtTxtMedName.setText(reminderToBeUpdated.getMedicineName());
 
@@ -204,16 +199,14 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
             oldPhotoPath = reminderToBeUpdated.getImagePath();
             btnCaptureMedPic.setText(new File(oldPhotoPath).getName());
             btnAddOrUpdate.setText(R.string.fragment_update_button_text);
-        } else {
-            toolbar.setTitle(R.string.add_reminder_fragment_name);
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnAddMedImg:
-                if (new Helper.PermissionHelper().checkPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            case R.id.btn_add_med_img:
+                if (checkWritePermission()) {
                     Intent imgCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     imgCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, createImageFile(edtTxtMedName.getText().toString().trim()));
                     if (imgCaptureIntent.resolveActivity(requireActivity().getPackageManager()) != null)
@@ -222,36 +215,30 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
                     Snackbar.make(requireView(), "Your permission is required to capture and store any image.", BaseTransientBottomBar.LENGTH_LONG).show();
                 }
                 break;
-            case R.id.btnSetReminderTime:
+            case R.id.btn_set_reminder_time:
                 if (reminderTime.length() == 0) {
-                    final TimePickerDialog dialog = new TimePickerDialog(requireContext(), new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            reminderTime = hourOfDay + ":" + minute;
-                            btnSetReminderTime.setText(new Helper.TimeHelper().formatTime(reminderTime));
-                        }
+                    final TimePickerDialog dialog = new TimePickerDialog(requireContext(), (view, hourOfDay, minute) -> {
+                        reminderTime = hourOfDay + ":" + minute;
+                        btnSetReminderTime.setText(new Helper.TimeHelper().formatTime(reminderTime));
                     }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), false);
                     dialog.show();
                 } else {
                     int[] hrMin = new Helper.TimeHelper().getRemHrMin(reminderTime);
-                    TimePickerDialog dialog = new TimePickerDialog(requireContext(), new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            reminderTime = hourOfDay + ":" + minute;
-                            btnSetReminderTime.setText(new Helper.TimeHelper().formatTime(reminderTime));
-                        }
+                    TimePickerDialog dialog = new TimePickerDialog(requireContext(), (view, hourOfDay, minute) -> {
+                        reminderTime = hourOfDay + ":" + minute;
+                        btnSetReminderTime.setText(new Helper.TimeHelper().formatTime(reminderTime));
                     }, hrMin[0], hrMin[1], true);
                     dialog.show();
                 }
                 break;
-            case R.id.btnCancel:
+            case R.id.btn_cancel:
                 if (!newPhotoPath.equals("")) {
                     if (new File(newPhotoPath).delete())
-                        Log.d("AddUpdateFragment", "new photo is cleared.");
+                        Timber.d("new photo is cleared.");
                 }
-                requireActivity().getSupportFragmentManager().popBackStackImmediate();
+                Navigation.findNavController(requireView()).navigateUp();
                 break;
-            case R.id.btnAddUpdate:
+            case R.id.btn_add_update:
                 if (!isAllViewChecked(new View[]{edtTxtMedName, edtTxtDailyIntake}) || medicineType.equals(getResources().getStringArray(R.array.spinner_med_type_array_res)[0]) || reminderTime.isEmpty()) {
                     Toast.makeText(requireContext(), "Please fill out every information properly!", Toast.LENGTH_LONG).show();
                 } else {
@@ -289,13 +276,30 @@ public class AddOrUpdateReminderFragment extends Fragment implements View.OnClic
                         public void onDismissed(Snackbar transientBottomBar, int event) {
                             super.onDismissed(transientBottomBar, event);
                             newPhotoPath = "";
-                            requireActivity().getSupportFragmentManager().popBackStackImmediate();
+                            Navigation.findNavController(requireView()).navigateUp();
                         }
                     });
                     snackbar.show();
                 }
                 break;
         }
+    }
+
+    private boolean checkWritePermission() {
+        String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        if (ContextCompat.checkSelfPermission(requireActivity().getBaseContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permission)) {
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity());
+                builder.setIcon(R.drawable.info);
+                builder.setTitle("Permission Request!");
+                builder.setMessage("Please, grant us the permission so that app can work as expected.");
+                builder.show();
+            } else {
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{permission}, 102);
+            }
+        } else
+            return true;
+        return ContextCompat.checkSelfPermission(requireActivity().getBaseContext(), permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override

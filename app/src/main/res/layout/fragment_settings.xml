@@ -8,17 +8,17 @@
     tools:ignore="NewApi">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarSettings"
+        android:id="@+id/settings_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppBarOverlay">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbarSettings"
+            android:id="@+id/settings_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            app:title="@string/fragment_title_settings" />
+            android:minHeight="?attr/actionBarSize" />
+
     </com.google.android.material.appbar.AppBarLayout>
     <!--this works as the container for the settings fragment
     put the code for the button layout above or below this framelayout

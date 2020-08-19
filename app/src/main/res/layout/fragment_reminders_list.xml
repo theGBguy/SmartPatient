@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout"
+    android:id="@+id/rem_list_cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="4dp"
@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         tools:itemCount="1"
         tools:listitem="@layout/reminder_row"
-        android:id="@+id/rvList"
+        android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -28,27 +28,40 @@
         <item name="actionModeBackground">?attr/colorPrimary</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeCloseDrawable">@drawable/back</item>
+        <item name="drawerArrowStyle">@style/DrawerArrayStyle</item>
         <item name="actionModeStyle">@style/MyActionModeStyle</item>
         <item name="spinnerStyle">@style/MySpinnerStyle</item>
-        <item name="materialButtonStyle">@style/MyMaterialButtonStyle</item>
+        <item name="materialAlertDialogTheme">@style/CustomDialogStyle</item>
 
         <item name="preferenceTheme">@style/MyPreferenceThemeOverlay</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/SmallComponentStyle</item>
+        <item name="shapeAppearanceMediumComponent">@style/MediumComponentStyle</item>
+        <item name="shapeAppearanceLargeComponent">@style/LargeComponentStyle</item>
     </style>
 
-    <style name="MyMaterialButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="shapeAppearance">@style/MyMaterialButtonShapeAppearance</item>
+    <style name="CustomDialogStyle" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/SmallComponentStyle</item>
     </style>
 
-    <style name="MyShapeableImageViewShapeAppearance" parent="">
+    <style name="DrawerArrayStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/lightWhite</item>
+    </style>
+
+    <style name="SmallComponentStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">20%</item>
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="MyMaterialButtonShapeAppearance" parent="">
+    <style name="MediumComponentStyle" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="LargeComponentStyle" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">48dp</item>
     </style>
 
     <style name="MyPreferenceThemeOverlay" parent="PreferenceThemeOverlay">

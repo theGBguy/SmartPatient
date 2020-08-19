@@ -1,7 +1,7 @@
 package com.gbsoft.smartpillreminder.ui.reminderslist;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,30 +9,27 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gbsoft.smartpillreminder.R;
 import com.gbsoft.smartpillreminder.databinding.FragmentRemindersListBinding;
-import com.gbsoft.smartpillreminder.model.Reminder;
 import com.gbsoft.smartpillreminder.room.ReminderViewModel;
-import com.google.android.material.card.MaterialCardView;
-
-import java.util.List;
 
 /**
  * A fragment which shows the list of reminders and its data in the recycler view.
  */
 public class RemindersListFragment extends Fragment {
-    private static final String REMINDER_TYPE_KEY = "reminder_type_key";
+    private static final String POSITION_KEY = "position_key";
     private CustomRecyclerViewAdapter adapter;
     private FragmentRemindersListBinding binding;
 
-    public static RemindersListFragment newInstance(String reminderType) {
+    public static RemindersListFragment newInstance(int position) {
         RemindersListFragment fragment = new RemindersListFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(REMINDER_TYPE_KEY, reminderType);
+        bundle.putInt(POSITION_KEY, position);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -45,6 +42,11 @@ public class RemindersListFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -54,23 +56,20 @@ public class RemindersListFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        String reminderType = getArguments() != null ? getArguments().getString(REMINDER_TYPE_KEY) : "";
-        if (reminderType != null && reminderType.length() > 1) {
+        String[] reminderTypeArray = getResources().getStringArray(R.array.reminder_type_array_res);
+        int position = requireArguments().getInt(POSITION_KEY, -1);
+        if (position != -1) {
+            String reminderType = reminderTypeArray[position];
+
             ReminderViewModel reminderViewModel = new ViewModelProvider(this).get(ReminderViewModel.class);
             adapter = new CustomRecyclerViewAdapter(this);
-            reminderViewModel.getAllRemindersByType(reminderType).observe(getViewLifecycleOwner(), new Observer<List<Reminder>>() {
-                @Override
-                public void onChanged(final List<Reminder> reminders) {
-                    Log.d("list_size", String.valueOf(reminders.size()));
-                    adapter.submitList(reminders);
-                }
-            });
+            reminderViewModel.getAllRemindersByType(reminderType).observe(getViewLifecycleOwner(), reminders -> adapter.submitList(reminders));
             if (savedInstanceState != null)
                 adapter.onRestoreInstanceState(savedInstanceState);
         }
 
         RecyclerView recyclerView = binding.rvList;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }
