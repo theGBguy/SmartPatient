@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Smart Pill Reminder</string>
+    <string name="app_name">Smart Patient</string>
 
     <!--    string resources for the MainActivity-->
 
@@ -85,5 +85,16 @@
 
     <string name="notif_missed_title">Reminder Missed!!</string>
     <string name="notif_content">A reminder to take medicine set for %1$s is missed.</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_log_in">Log in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_title_text">Welcome! Let\'s get you started!</string>
+    <string name="register_text">Don\'t have an account? Register here</string>
 
 </resources>

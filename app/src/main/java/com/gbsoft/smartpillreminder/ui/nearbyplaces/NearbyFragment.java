@@ -78,7 +78,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
             LocationComponent locationComponent = mapboxMap.getLocationComponent();
             LocationComponentOptions options = LocationComponentOptions.builder(requireContext())
                     .pulseEnabled(true)
-                    .pulseColor(getResources().getColor(R.color.colorPrimary900))
+                    .pulseColor(getResources().getColor(R.color.colorPrimaryDark))
                     .pulseAlpha(.4f)
                     .pulseInterpolator(new BounceInterpolator())
                     .build();

@@ -3,28 +3,28 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorSecondary500</item>
-        <item name="colorPrimaryDark">@color/colorSecondary700</item>
-        <item name="colorPrimaryVariant">@color/colorSecondary700</item>
+        <item name="colorPrimary">@color/colorSecondary</item>
+        <item name="colorPrimaryDark">@color/colorSecondaryDark</item>
+        <item name="colorPrimaryVariant">@color/colorSecondaryLight</item>
 
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
 
-        <item name="colorSecondary">@color/colorPrimary200</item>
-        <item name="colorSecondaryVariant">@color/colorPrimary500</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
 
         <item name="android:colorBackground">@color/lightDark</item>
         <item name="colorSurface">@color/lightDark</item>
         <item name="colorError">@color/colorErrorAlternateNight</item>
 
         <item name="colorOnPrimary">@color/lightWhite</item>
-        <item name="colorOnSecondary">@color/lightDark</item>
+        <item name="colorOnSecondary">@color/lightWhite</item>
         <item name="colorOnBackground">@color/lightWhite</item>
         <item name="colorOnSurface">@color/lightWhite</item>
         <item name="colorOnError">@color/lightWhite</item>
 
         <item name="toolbarStyle">@style/MyToolBarStyle</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="actionModeBackground">@color/colorAccent</item>
+        <item name="actionModeBackground">?colorAccent</item>
         <item name="actionModeCloseDrawable">@drawable/back</item>
         <item name="drawerArrowStyle">@style/DrawerArrayStyle</item>
         <item name="actionModeStyle">@style/MyActionModeStyle</item>

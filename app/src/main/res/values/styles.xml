@@ -3,25 +3,25 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary900</item>
-        <item name="colorPrimaryDark">@color/colorPrimary900</item>
-        <item name="colorPrimaryVariant">@color/colorPrimary200</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryLight</item>
 
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorSecondary</item>
 
-        <item name="colorSecondary">@color/colorSecondary500</item>
-        <item name="colorSecondaryVariant">@color/colorSecondary700</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryLight</item>
 
-        <item name="android:colorBackground">@android:color/white</item>
-        <item name="colorSurface">@color/lightWhite</item>
-        <item name="colorError">@color/colorErrorAlternateNight</item>
+        <item name="android:colorBackground">@color/colorSurface</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorError">@color/colorError</item>
 
 
         <item name="colorOnPrimary">@color/lightWhite</item>
-        <item name="colorOnSecondary">@color/lightDark</item>
+        <item name="colorOnSecondary">@color/lightWhite</item>
         <item name="colorOnBackground">@color/lightDark</item>
         <item name="colorOnSurface">@color/lightDark</item>
-        <item name="colorOnError">@color/lightDark</item>
+        <item name="colorOnError">@color/lightWhite</item>
 
         <item name="toolbarStyle">@style/MyToolBarStyle</item>
         <item name="actionOverflowMenuStyle">@style/MyOverflowMenuStyle</item>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -40,4 +40,17 @@
             android:id="@+id/action_remindersListFragment_to_addOrUpdateReminderFragment"
             app:destination="@id/addOrUpdateReminderFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.gbsoft.smartpillreminder.ui.login.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.gbsoft.smartpillreminder.ui.login.ui.login.RegisterFragment"
+        android:label="RegisterFragment" />
 </navigation>
