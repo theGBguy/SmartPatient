@@ -60,6 +60,7 @@ public class ChatDetailsVM extends ViewModel {
     }
 
     public void onFabSendClick() {
+        if (msg.getValue() == null) return;
         Message message = new Message(System.currentTimeMillis(), msg.getValue(), senderInfo, receiverInfo);
         remoteRepo.sendMessage(message, chatIdentifier.getValue().getChatId());
         msg.setValue("");

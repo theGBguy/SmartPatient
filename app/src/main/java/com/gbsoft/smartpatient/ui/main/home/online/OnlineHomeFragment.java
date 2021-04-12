@@ -125,7 +125,8 @@ public class OnlineHomeFragment extends Fragment {
 
     private void setMedicinesRecyclerView(boolean isHp) {
         FirestoreRecyclerOptions<Medicine> medOptions = new FirestoreRecyclerOptions.Builder<Medicine>()
-                .setQuery(isHp ? viewModel.getHPMedicinesQuery(queryString) : viewModel.getPatientMedicinesQuery(queryString), CustomMapper::getMedicineFromSnapshot)
+                .setQuery(isHp ? viewModel.getHPMedicinesQuery(queryString) : viewModel.getPatientMedicinesQuery(queryString),
+                        CustomMapper::getMedicineFromSnapshot)
                 .setLifecycleOwner(getViewLifecycleOwner())
                 .build();
         medObv = new RVEmptyObserver(binding.rvMedicinesList, binding.tvNoMedicines);

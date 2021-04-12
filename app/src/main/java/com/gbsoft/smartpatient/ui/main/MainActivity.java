@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         if (savedInstanceState == null) {
-            viewModel.init(false);
+            viewModel.init(true);
 
             viewModel.getPendingMedicinesSize().observe(this, size -> {
                 ComponentName bootCompletedReceiver = new ComponentName(MainActivity.this, BootCompletedReceiver.class);
