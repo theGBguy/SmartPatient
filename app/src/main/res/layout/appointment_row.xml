@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.gbsoft.smartpatient.utils.TimeHelper" />
+
+        <variable
+            name="vm"
+            type="com.gbsoft.smartpatient.ui.main.appointmentlist.AppointmentItemVM" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/ListItemCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/tv_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="4dp"
+                android:text="@{vm.appointment.name}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toStartOf="@+id/tv_approved_status"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Appointment Name" />
+
+            <TextView
+                android:id="@+id/tv_with_person_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:drawablePadding="4dp"
+                android:text="@{vm.appWithLabel}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:drawableStartCompat="@drawable/ic_baseline_person_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_app_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_app_name"
+                tools:text="Appointment with Doctor X" />
+
+            <TextView
+                android:id="@+id/tv_app_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingBottom="8dp"
+                android:drawablePadding="4dp"
+                android:text="@{TimeHelper.formatLocalDateTime(vm.appointment.scheduledTime)}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:drawableStartCompat="@drawable/ic_baseline_access_time_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_with_person_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/tv_with_person_lbl"
+                tools:text="2020/12/12 10:10 am" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_approved_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{vm.approvedStatusLabel}"
+                android:textColor="?colorOnPrimary"
+                app:bgColor="@{vm.bgColor}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Approved" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_approved"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:onClick="@{() -> vm.setApprovalStatus(true)}"
+                android:text="@string/btn_approve_txt"
+                app:backgroundTint="@color/colorSuccess"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_reject"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_app_date" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:backgroundTint="?colorError"
+                android:onClick="@{() -> vm.setApprovalStatus(false)}"
+                android:text="@string/btn_reject_txt"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_approved"
+                app:layout_constraintTop_toBottomOf="@+id/tv_app_date" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="btn_reject,btn_approved"
+                app:hideIfTrue="@{vm.shouldHideButtons()}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

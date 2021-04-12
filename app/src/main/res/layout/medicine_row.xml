@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.gbsoft.smartpatient.ui.main.medicinelist.ItemViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/reminder_row_card"
+        style="@style/ListItemCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:checkable="true"
+        android:longClickable="true"
+        app:checkedIcon="@drawable/ic_baseline_check_circle_24"
+        app:checkedStatus="@{vm.isActivated()}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/reminder_row_const_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/rr_iv_med"
+                android:layout_width="match_parent"
+                android:layout_height="173dp"
+                android:layout_margin="4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:srcCompat="@{vm.imgPath}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/MediumComponentStyle" />
+
+            <TextView
+                android:id="@+id/rr_tv_med_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@{vm.medNameText}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.014"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rr_iv_med"
+                tools:text="Paracetamol(3 times a day)" />
+
+            <TextView
+                android:id="@+id/rr_tv_time_to_remind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:drawablePadding="4dp"
+                android:gravity="start"
+                android:text="@{vm.reminderTimeStr}"
+                app:drawableStartCompat="@drawable/reminder_set"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rr_tv_med_name"
+                tools:text="6:30 pm" />
+
+            <TextView
+                android:id="@+id/rr_tv_remaining"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:drawablePadding="4dp"
+                android:gravity="start"
+                android:updater="@{vm.reminderTime}"
+                app:drawableStartCompat="@drawable/time_remaining"
+                app:hideIfNotTrue="@{vm.isPending()}"
+                app:layout_constraintBottom_toBottomOf="@+id/rr_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/rr_bar"
+                app:layout_constraintTop_toTopOf="@+id/rr_bar"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="5 mins remaining" />
+
+            <View
+                android:id="@+id/rr_bar"
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:background="?android:attr/listDivider"
+                app:hideIfNotTrue="@{vm.isPending()}"
+                app:layout_constraintBottom_toBottomOf="@+id/rr_tv_time_to_remind"
+                app:layout_constraintStart_toEndOf="@+id/rr_tv_time_to_remind"
+                app:layout_constraintTop_toTopOf="@+id/rr_tv_time_to_remind" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

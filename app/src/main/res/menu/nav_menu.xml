@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_main">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_online_home"
+            android:icon="@drawable/home"
+            android:title="@string/fragment_home_label" />
+        <item
+            android:id="@+id/nav_appointment_list"
+            android:icon="@drawable/ic_baseline_appointment_list_24"
+            android:title="@string/fragment_appointment_list_label" />
+        <item
+            android:id="@+id/nav_chat_list"
+            android:icon="@drawable/ic_baseline_list_24"
+            android:title="@string/fragment_chat_list_label" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_baseline_account_box_24"
+            android:title="@string/fragment_profile_label" />
+    </group>
+</menu>

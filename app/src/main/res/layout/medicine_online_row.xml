@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.gbsoft.smartpatient.ui.main.home.online.MedicineItemVm" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/med_row_card"
+        style="@style/ListItemCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:onClick="@{vm::onCardClick}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/med_row_const_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/med_tv_prescribed_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:gravity="start"
+                android:padding="4dp"
+                android:text="@{vm.prescribedBy}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:drawableStartCompat="@drawable/ic_baseline_person_24"
+                app:hideIfTrue="@{vm.hp}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/med_tv_med_name"
+                tools:text="Prescribed by : Doctor X" />
+
+            <TextView
+                android:id="@+id/med_tv_prescribed_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:gravity="start"
+                android:padding="4dp"
+                android:text="@{vm.prescribedTo}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:drawableStartCompat="@drawable/ic_baseline_person_24"
+                app:hideIfTrue="@{!vm.hp}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/med_tv_prescribed_by"
+                tools:text="Prescribed to : Patient Name" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/med_iv_med"
+                android:layout_width="match_parent"
+                android:layout_height="173dp"
+                android:layout_margin="4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:srcCompat="@{vm.medicineImagePath}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/MediumComponentStyle" />
+
+            <TextView
+                android:id="@+id/med_tv_med_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="4dp"
+                android:text="@{vm.medNameText}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.014"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/med_iv_med"
+                tools:text="Paracetamol(3 times a day)" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -31,7 +31,11 @@
         <item name="drawerArrowStyle">@style/DrawerArrayStyle</item>
         <item name="actionModeStyle">@style/MyActionModeStyle</item>
         <item name="spinnerStyle">@style/MySpinnerStyle</item>
-        <item name="materialAlertDialogTheme">@style/CustomDialogStyle</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert
+        </item>
+        <item name="circularProgressIndicatorStyle">
+            @style/ThemeOverlay.MaterialComponents.Dialog.Alert
+        </item>
 
         <item name="preferenceTheme">@style/MyPreferenceThemeOverlay</item>
 
@@ -42,6 +46,10 @@
 
     <style name="CustomDialogStyle" parent="MaterialAlertDialog.MaterialComponents">
         <item name="shapeAppearance">@style/SmallComponentStyle</item>
+    </style>
+
+    <style name="CustomProgressIndicatorStyle" parent="Widget.MaterialComponents.CircularProgressIndicator">
+
     </style>
 
     <style name="DrawerArrayStyle" parent="Widget.AppCompat.DrawerArrowToggle">
@@ -59,10 +67,45 @@
         <item name="cornerSize">24dp</item>
     </style>
 
+    <style name="CircularComponentStyle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="TopRoundedStyle" parent="">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeTopRight">24dp</item>
+    </style>
+
+    <style name="LeftRoundedStyle" parent="">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeBottomLeft">24dp</item>
+    </style>
+
+
     <style name="LargeComponentStyle" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">48dp</item>
     </style>
+
+    <style name="LeftMsgStyle" parent="">
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+        <item name="cornerSizeTopRight">32dp</item>
+        <item name="cornerSizeBottomRight">32dp</item>
+    </style>
+
+    <style name="RightMsgStyle" parent="">
+        <item name="cornerSizeTopLeft">32dp</item>
+        <item name="cornerSizeBottomLeft">32dp</item>
+        <item name="cornerSizeTopRight">8dp</item>
+        <item name="cornerSizeBottomRight">8dp</item>
+    </style>
+
 
     <style name="MyPreferenceThemeOverlay" parent="PreferenceThemeOverlay">
         <item name="android:layout">@layout/fragment_settings</item>
@@ -89,6 +132,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.MaterialComponents">
@@ -108,6 +152,22 @@
 
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_drawable</item>
+    </style>
+
+    <style name="Widget.AppTheme.NoActionBar.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+    <style name="ListItemCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">4dp</item>
+        <!--        <item name="cardCornerRadius">4dp</item>-->
+        <!--        <item name="strokeWidth">1dp</item>-->
+        <item name="android:layout_margin">8dp</item>
+        <!--        <item name="strokeColor">?colorPrimary</item>-->
+        <item name="rippleColor">?colorPrimary</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
     </style>
 
 </resources>

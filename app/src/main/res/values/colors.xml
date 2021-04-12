@@ -5,16 +5,24 @@
     <color name="colorPrimaryDark">#00356d</color>
 
     <color name="colorSecondaryLight">#d36b31</color>
+    <color name="colorSecondaryLightest">#FFD54F</color>
     <color name="colorSecondary">#9c3e00</color>
     <color name="colorSecondaryDark">#680e00</color>
+
+    <color name="colorSuccess">#2e7d32</color>
 
     <color name="colorError">#B00020</color>
     <color name="colorErrorAlternate">#ff9800</color>
     <color name="colorErrorAlternateNight">#FFAB40</color>
-<!--    <color name="colorErrorNight">#cf6679</color>-->
+    <!--    <color name="colorErrorNight">#cf6679</color>-->
 
     <color name="colorSurface">#ddffd2</color>
     <color name="lightWhite">#f0f0f0</color>
     <color name="lightDark">#262626</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
 
 </resources>

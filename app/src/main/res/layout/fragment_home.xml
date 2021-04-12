@@ -1,44 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppBarOverlay">
+    <data>
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/home_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize" />
+        <variable
+            name="viewmodel"
+            type="com.gbsoft.smartpatient.ui.main.home.offline.OfflineHomeViewModel" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/home_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.appbar.AppBarLayout>
+        <variable
+            name="eventhandler"
+            type="com.gbsoft.smartpatient.ui.main.home.offline.OfflineHomeEventHandler" />
+    </data>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/home_view_pager"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        tools:context=".ui.main.MainActivity">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/home_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="@string/home_extendedFAB_text"
-        android:textColor="@color/lightWhite"
-        android:transitionName="@string/from_main_to_addUpdate"
-        app:icon="@drawable/fab_add"
-        app:iconTint="@color/lightWhite" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppBarOverlay">
 
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/home_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/home_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:addTabSelectionWatcher="@{viewmodel}"
+                app:tabInlineLabel="true"
+                app:tabMode="auto" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/home_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/home_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{(v) -> eventhandler.onFabClick(v, viewmodel)}"
+            android:showHide="@{safeUnbox(viewmodel.currentTabPos)}"
+            android:text="@string/home_extendedFAB_text"
+            android:transitionName="@string/from_main_to_addUpdate"
+            app:icon="@drawable/fab_add" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -4,32 +4,48 @@
     <!--    string resources for the MainActivity-->
 
     <!--    fragments name-->
-    <string name="add_reminder_fragment_label">Add a new reminder</string>
-    <string name="update_reminder_fragment_label">Update reminder for</string>
-    <string name="reminder_list_fragment_label">Reminder List</string>
+    <string name="fragment_add_medicine_label">Add a new medicine</string>
+    <string name="fragment_update_medicine_label">Update medicine for</string>
+    <string name="fragment_medicine_list_label">Medicines List</string>
     <string name="fragment_home_label">Home</string>
     <string name="fragment_settings_label">Settings</string>
-    <string name="fragment_nearby_label">Hospitals</string>
+    <string name="fragment_login_label">Login</string>
+    <string name="fragment_register_label">Register</string>
+    <string name="fragment_appointment_list_label">Appointment List</string>
+    <string name="fragment_chat_list_label">Chat list</string>
+    <string name="fragment_new_appointment_label">New Appointment</string>
+    <string name="fragment_chat_detail_label">Chat Detail</string>
+    <string name="fragment_profile_label">Profile</string>
 
     <!--    string resources used in fragment_home-->
-    <string name="home_extendedFAB_text">Add a new reminder</string>
+    <string name="home_extendedFAB_text">Add a new medicine</string>
 
-    <!--    string resources used in fragment_nearby-->
-    <string name="nearby_extendedFAB_text">Search near you</string>
-
-    <!--    string resources used in fragment_add_update_reminder-->
+    <!--    string resources used in fragment_add_update_medicine-->
     <string name="edtTxtMedName_hint">Medicine Name </string>
     <string name="tvMedType_text">Medicine Type : </string>
-    <string name="tvSetReminderTime_text">Set Reminder Time</string>
-    <string name="edtTxtDailyIntake_hint">Daily intake </string>
+    <string name="spinnerMedTypeNoSelection_text">Please select the medicine type from the dropdown!</string>
+    <string name="btnSetReminderTime_text">Set Reminder Time</string>
+    <string name="btnSetExpiryDate_text">Set Expiry Date</string>
+    <string name="edtTxtDailyIntake_hint">Daily intake</string>
+    <string name="edtTxtPrescribedBy_hint">Prescribed by</string>
+    <string name="edtTxtMedicineNotes_hint">Enter important info about this medicine if any</string>
     <string name="btnAddMedImg_text">Capture Medicine Image</string>
-    <string name="fragment_add_button_text">Add</string>
-    <string name="fragment_update_button_text">Update</string>
-    <string name="fragment_cancel_button_text">Cancel</string>
+    <string name="btnAdd_text">Add</string>
+    <string name="btnUpdate_text">Update</string>
+    <string name="btnCancel_text">Cancel</string>
+    <string name="saveImgSuccess_text">Image of Reminder is stored successfully</string>
+    <string name="writePermissionRequired_text">Your permission is required to capture and store any image</string>
+    <string name="reminderUpdateSuccess_text">The current reminder has been updated successfully!</string>
+    <string name="reminderInsertSuccess_text">Reminders have been scheduled successfully!</string>
 
     <!--    string resources for menu_action and menu_main-->
     <string name="menu_action_edit">Edit</string>
     <string name="menu_action_delete">Delete</string>
+
+    <plurals name="menu_action_title">
+        <item quantity="one">%d item selected</item>
+        <item quantity="other">%d items selected</item>
+    </plurals>
     <string name="menu_action_title">%1$d item%2$s selected</string>
 
     <!--    string resources for reminder_row-->
@@ -51,10 +67,7 @@
     <!--    summary resources-->
     <string name="summary_night_mode_on">On</string>
     <string name="summary_night_mode_off">Off</string>
-    <string name="summary_about_dev">Developed in co-ordination with Fantastic-4</string>
-
-    <!--    mapbox access token-->
-    <string name="mapbox_access_token">pk.eyJ1IjoiZ2J6bWFwYm94IiwiYSI6ImNrYnc2MDJqYjBjd2kzNG5zaHcza202cHcifQ.GA9ufT4xgnIB6kw9XSvWRA</string>
+    <string name="summary_about_dev">Developed by Fantastic-4 as 7th semester project</string>
 
     <!--    different array resources-->
     <!--    array for spinner to show different medicine types-->
@@ -79,22 +92,155 @@
     <string name="btnSetAlarmCustomHoursLater_text">Remind again custom time later</string>
 
     <!--    string resources related to notification-->
-    <string name="notif_channel_id">SPR_Channel_ID</string>
-    <string name="notif_channel_name">Smart Pill Reminder</string>
+    <string name="notif_channel_id">SP_Channel_ID</string>
+    <string name="notif_channel_name">Smart Patient</string>
     <string name="notif_channel_desc">This notification channel is used to notify the user about the missed reminders.</string>
 
     <string name="notif_missed_title">Reminder Missed!!</string>
     <string name="notif_content">A reminder to take medicine set for %1$s is missed.</string>
 
+    <!--    Strings common to login and register-->
+    <string name="hint_email">Email</string>
+    <string name="hint_pass">Password</string>
+
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
     <string name="action_log_in">Log in</string>
+    <string name="btnOffline_txt">Switch to Offline Mode</string>
     <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="login_title_text">Welcome! Let\'s get you started!</string>
     <string name="register_text">Don\'t have an account? Register here</string>
+    <string name="btnSettings_txt">Configure app\'s settings</string>
+
+    <!--    Strings related to validation-->
+    <string name="invalid_name">Not a valid name</string>
+    <string name="invalid_address">Not a valid address</string>
+    <string name="invalid_age">Not a valid age</string>
+    <string name="invalid_qualification">Do not leave this field empty</string>
+    <string name="invalid_nmc">Enter valid NMC number</string>
+    <string name="invalid_speciality">Do not leave this field empty</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >8 characters</string>
+    <string name="invalid_phone">Phone number must be of 10 digits</string>
+    <string name="invalid_gender">A gender must be selected</string>
+
+    <!--    String related to registration-->
+    <string name="hint_name">Name</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_age">Age</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_nmc">NMC number</string>
+    <string name="hint_qualification">Qualification</string>
+    <string name="hint_speciality">Speciality(Area of Expertise)</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_others">Others</string>
+    <string name="register_patients">Register as Patient</string>
+    <string name="register_hp">Register as Health Personnel</string>
+    <string name="login_acc_already">Already have an account? Login here</string>
+    <string name="register_title">Your new account is just a single step away!</string>
+    <string name="iv_cont_desc_logo">It is logo of this application.</string>
+
+    <string name="registration_ok">Registration is successful, please check your email for verification link and login</string>
+    <string name="registration_failed">Registration failed, please try again later</string>
+
+    <!--    string resources related to New Appointment fragment-->
+    <string name="hint_appointment_name">Enter appointment name</string>
+    <string name="hint_doctor_name">Enter doctor/health personnel name</string>
+    <string name="btnSetAppointmentTime_Text">Set Appointment Time</string>
+
+    <string-array name="users">
+        <item>Patient</item>
+        <item>Health Personnel</item>
+    </string-array>
+
+    <plurals name="reminder_hr">
+        <item quantity="one">%d hr</item>
+        <item quantity="many">%d hrs</item>
+    </plurals>
+
+    <plurals name="reminder_min">
+        <item quantity="one">%d min</item>
+        <item quantity="many">%d mins</item>
+    </plurals>
+
+    <plurals name="med_entry_deletion_text">
+        <item quantity="one">A medicine entry has been deleted!</item>
+        <item quantity="other">Selected medicine entries have been deleted!</item>
+    </plurals>
+
+    <!--    content descriptions only-->
+    <string name="cont_desc_btn_send">Send this message.</string>
+    <string name="cont_desc_btn_convo_add">Start new conversation.</string>
+    <string name="cont_desc_btn_app_add">Take a new appointment.</string>
+
+    <!--    string resources for fragment new appointment-->
+    <string name="tvWithPerson_txt">Health Personnel :</string>
+    <string name="insertAppointmentSuccess_txt">Appointment has been requested successfully</string>
+
+    <!--    string resources for fragment appointment list-->
+    <string name="rvHpList_label_txt">Available Health Personnel</string>
+    <string name="rvPList_label_txt">Connected Patient List</string>
+    <string name="tv_no_patient_txt">You are not connected with any patient</string>
+    <string name="tv_no_hp_txt">There are not any health personnel available</string>
+    <string name="rvAppList_label_txt">My Appointments</string>
+    <string name="tv_no_app_txt">There are no appointments scheduled for you. If you are a patient,
+        try taking an appointment by clicking the respective health personnel card and if you are not,
+        there is nothing you can do about it xD</string>
+
+    <!--    string resources for menu_main.xml-->
+    <string name="menuLogOut_title">Logout</string>
+    <string name="logOut_success">You have been logged out!</string>
+
+    <!--    string resources for the log out dialog-->
+    <string name="dialog_logout_msg">Are you sure you want to log out?</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_ok">OK</string>
+
+    <!--    string resources for profile screen -->
+    <string name="send_email_title">Send email</string>
+    <string name="til_availability_hint">10:00 am to 11:00 am</string>
+    <string name="pic_upload">Uploading your profile picture</string>
+    <string name="pic_upload_successful">Profile picture upload completed successfully</string>
+    <string name="pic_upload_failed">Profile picture upload failed! Please try again!</string>
+    <string name="avail_update_successful">Availability status updated successfully</string>
+    <string name="avail_update_failed">Availability status update failed! Please try again!</string>
+    <string name="user_fetch_error">Error fetching user\'s data! Please press button and try again later!</string>
+    <string name="tv_pp_info_txt">Click the picture above to update your profile picture.</string>
+    <string name="fabOptions_txt">Options</string>
+    <string name="fabOptions_txt_alt">Close</string>
+    <string name="fabPhone_txt">Call</string>
+    <string name="fabEmail_txt">Email</string>
+    <string name="btnNewApp_txt">New Appointment</string>
+
+    <!--    string resources for appointment row-->
+    <string name="btn_approve_txt">Approve</string>
+    <string name="btn_reject_txt">Reject</string>
+    <string name="approval_update_successful">Appointment\'s approval status updated successfully</string>
+    <string name="approval_update_failed">Appointment\'s approval status update failed</string>
+
+    <!--    string resources for alarm time picker bottom sheet dialog-->
+    <string name="chip_add_alarm_time_txt">Add alarm time</string>
+    <string name="tv_alarm_time_picker_title">Select alarm time/s</string>
+
+    <!--    string resources for onlinehomefragment-->
+    <string name="tv_medicines_list_txt_hp">Medicines prescribed by you</string>
+    <string name="tv_medicines_list_txt_p">Medicines prescribed for you</string>
+    <string name="tv_no_medicines_txt">There are no medicines prescribed for/by you currently.
+        If you are a health personnel, click the patient from the list above to start prescribing medicines
+        and if you are not, there is nothing you can do about it xD</string>
+
+    <!--    string resources for medicinedetailfragment-->
+    <string name="tv_reminders_label_txt">Reminder/s for this medicine</string>
+    <string name="deletionSuccess_txt">This medicine entry along with it\'s reminders have been deleted</string>
+
+    <!--    string resources for chatlistfragment-->
+    <string name="tvChatIdList_txt">My chats</string>
+    <string name="tvAvailableList_txt_p">Available Health Personnel</string>
+    <string name="tvAvailableList_txt_hp">Available Patients</string>
+    <string name="tv_no_chat_id_txt">There are not any messages. Click on the available list above to start your first conversation.</string>
+
+    <!--    string resources for chatdetailsfragment-->
+    <string name="tv_no_msg_txt">Start your fresh conversation by sending a new message below.</string>
 
 </resources>

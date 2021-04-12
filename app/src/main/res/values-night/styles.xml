@@ -3,20 +3,20 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorSecondary</item>
+        <item name="colorPrimary">@color/colorSecondaryLightest</item>
         <item name="colorPrimaryDark">@color/colorSecondaryDark</item>
-        <item name="colorPrimaryVariant">@color/colorSecondaryLight</item>
+        <item name="colorPrimaryVariant">@color/colorSecondary</item>
 
-        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimaryLight</item>
 
-        <item name="colorSecondary">@color/colorPrimary</item>
-        <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
+        <item name="colorSecondary">@color/colorPrimaryLight</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary</item>
 
         <item name="android:colorBackground">@color/lightDark</item>
         <item name="colorSurface">@color/lightDark</item>
         <item name="colorError">@color/colorErrorAlternateNight</item>
 
-        <item name="colorOnPrimary">@color/lightWhite</item>
+        <item name="colorOnPrimary">@color/lightDark</item>
         <item name="colorOnSecondary">@color/lightWhite</item>
         <item name="colorOnBackground">@color/lightWhite</item>
         <item name="colorOnSurface">@color/lightWhite</item>
@@ -58,6 +58,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.MaterialComponents">

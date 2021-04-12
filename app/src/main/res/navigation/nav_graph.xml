@@ -3,54 +3,97 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/nav_login">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.gbsoft.smartpillreminder.ui.home.HomeFragment"
+        android:id="@+id/nav_offline_home"
+        android:name="com.gbsoft.smartpatient.ui.main.home.offline.OfflineHomeFrag"
         android:label="@string/fragment_home_label"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_navigation_home_to_addOrUpdateReminderFragment"
-            app:destination="@id/addOrUpdateReminderFragment" />
+            android:id="@+id/action_home_to_add_update_medicine"
+            app:destination="@id/nav_add_update_medicine" />
     </fragment>
+
     <fragment
-        android:id="@+id/navigation_nearby"
-        android:name="com.gbsoft.smartpillreminder.ui.nearbyplaces.NearbyFragment"
-        android:label="@string/fragment_nearby_label"
-        tools:layout="@layout/fragment_nearby" />
-    <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.gbsoft.smartpillreminder.ui.settings.SettingsFragment"
+        android:id="@+id/nav_settings"
+        android:name="com.gbsoft.smartpatient.ui.main.settings.SettingsFrag"
         android:label="@string/fragment_settings_label"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/addOrUpdateReminderFragment"
-        android:name="com.gbsoft.smartpillreminder.ui.addorupdate.AddOrUpdateReminderFragment"
-        android:label="@string/add_reminder_fragment_label"
-        tools:layout="@layout/fragment_add_update_reminder" />
+        android:id="@+id/nav_add_update_medicine"
+        android:name="com.gbsoft.smartpatient.ui.main.addupdatemed.AddUpdateMedicineFrag"
+        android:label="@string/fragment_add_medicine_label"
+        tools:layout="@layout/fragment_add_update_medicine" />
 
     <fragment
-        android:id="@+id/remindersListFragment"
-        android:name="com.gbsoft.smartpillreminder.ui.reminderslist.RemindersListFragment"
-        android:label="fragment_reminders_list"
-        tools:layout="@layout/fragment_reminders_list">
+        android:id="@+id/nav_medicines_list"
+        android:name="com.gbsoft.smartpatient.ui.main.medicinelist.MedicineListFrag"
+        android:label="@string/fragment_medicine_list_label"
+        tools:layout="@layout/fragment_medicine_list">
         <action
-            android:id="@+id/action_remindersListFragment_to_addOrUpdateReminderFragment"
-            app:destination="@id/addOrUpdateReminderFragment" />
+            android:id="@+id/action_medicines_list_to_add_update_medicine"
+            app:destination="@id/nav_add_update_medicine" />
     </fragment>
+
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.gbsoft.smartpillreminder.ui.login.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-    </fragment>
+        android:id="@+id/nav_login"
+        android:name="com.gbsoft.smartpatient.ui.main.login.LoginFrag"
+        android:label="@string/fragment_login_label"
+        tools:layout="@layout/fragment_login" />
+
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.gbsoft.smartpillreminder.ui.login.ui.login.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:id="@+id/nav_register"
+        android:name="com.gbsoft.smartpatient.ui.main.register.RegisterFrag"
+        android:label="@string/fragment_register_label"
+        tools:layout="@layout/fragment_register" />
+
+    <fragment
+        android:id="@+id/nav_chat_list"
+        android:name="com.gbsoft.smartpatient.ui.main.chatlist.ChatListFrag"
+        android:label="@string/fragment_chat_list_label"
+        tools:layout="@layout/fragment_chat_list" />
+
+    <fragment
+        android:id="@+id/nav_appointment_list"
+        android:name="com.gbsoft.smartpatient.ui.main.appointmentlist.AppointmentListFrag"
+        android:label="@string/fragment_appointment_list_label"
+        tools:layout="@layout/fragment_appointment_list" />
+
+    <fragment
+        android:id="@+id/nav_chat_details"
+        android:name="com.gbsoft.smartpatient.ui.main.chatdetails.ChatDetailsFrag"
+        android:label="@string/fragment_chat_detail_label"
+        tools:layout="@layout/fragment_chat_details_list" />
+
+    <fragment
+        android:id="@+id/nav_new_appointment"
+        android:name="com.gbsoft.smartpatient.ui.main.newapp.NewAppointmentFrag"
+        android:label="@string/fragment_new_appointment_label"
+        tools:layout="@layout/fragment_new_appointment" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.gbsoft.smartpatient.ui.main.profile.ProfileFragment"
+        android:label="@string/fragment_profile_label"
+        tools:layout="@layout/fragment_profile" />
+
+    <dialog
+        android:id="@+id/nav_reminder_date_time_picker"
+        android:name="com.gbsoft.smartpatient.ui.main.dialogs.ReminderDateTimePickerFragment"
+        android:label="ReminderDateTimePickerFragment"
+        tools:layout="@layout/fragment_reminder_date_time_picker" />
+
+    <fragment
+        android:id="@+id/nav_online_home"
+        android:name="com.gbsoft.smartpatient.ui.main.home.online.OnlineHomeFragment"
+        android:label="@string/fragment_home_label"
+        tools:layout="@layout/medicine_online_row" />
+
+    <fragment
+        android:id="@+id/nav_medicine_details"
+        android:name="com.gbsoft.smartpatient.ui.main.medicinedetails.MedicineDetailFrag"
+        android:label="Medicine Details"
+        tools:layout="@layout/medicine_detail_fragment" />
 </navigation>

@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "643799729128",
+    "firebase_url": "https://smart-patient-d5abd.firebaseio.com",
+    "project_id": "smart-patient-d5abd",
+    "storage_bucket": "smart-patient-d5abd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643799729128:android:06cca58a03b2c6c792da5d",
+        "android_client_info": {
+          "package_name": "com.gbsoft.smartpatient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643799729128-j5mou5cqnc6ffrjen1javpj8bfk3c2on.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gbsoft.smartpatient",
+            "certificate_hash": "8e8f3fd2e1a2beddca30484a8e6b9acd5090dbe6"
+          }
+        },
+        {
+          "client_id": "643799729128-vev7pbemog2ae3gn13t5mklh531jrvms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gbsoft.smartpatient",
+            "certificate_hash": "0713b09139d250022662f0ca3b8bb22faec407c7"
+          }
+        },
+        {
+          "client_id": "643799729128-7mrph98960c6pmintkcqctamduepo3go.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBONO2XcC4UqDez8LmELNqoRNzOPmdFhFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643799729128-7mrph98960c6pmintkcqctamduepo3go.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
