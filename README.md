@@ -2,6 +2,13 @@
 It is an android application primarily focused to remind the patient for their medicine intake.
 This repository contains two versions of the implementation; offline version(in master branch) and full-fletched version(in dev-ongoing branch).
 
+Screenshots:
+![login](https://user-images.githubusercontent.com/25641763/126036235-b037b99d-66b1-4af8-8ffc-41668b56b12e.jpg)
+![registration](https://user-images.githubusercontent.com/25641763/126036236-429aef30-2227-4231-b356-94dd1e482016.jpg)
+![add_new_medicine](https://user-images.githubusercontent.com/25641763/126036231-6b195524-2185-4122-a19c-9d0d8fe5d683.jpg)
+![appointment_list](https://user-images.githubusercontent.com/25641763/126036233-b0879266-001d-4589-853b-2ac3b3d4fd36.jpg)
+![appointment_list_hp](https://user-images.githubusercontent.com/25641763/126036234-5862de2e-03d3-4dca-9c49-1c5587e0af90.jpg)
+
 Features of offline version:
 1. It can schedule alarms for medicine information entered via AddNewMedicine screen. 
 2. Details of medicine along with it's image and useful information(if was entered while scheduling alarms) would be displayed during the time of alarm.
