@@ -4,11 +4,19 @@ This repository contains two versions of the implementation; offline version(in 
 
 **Screenshots:**
 
-<img src="https://user-images.githubusercontent.com/25641763/126036235-b037b99d-66b1-4af8-8ffc-41668b56b12e.jpg" width="30%"></img>
-<img src="https://user-images.githubusercontent.com/25641763/126036236-429aef30-2227-4231-b356-94dd1e482016.jpg" width="30%"></img>
-<img src="https://user-images.githubusercontent.com/25641763/126036231-6b195524-2185-4122-a19c-9d0d8fe5d683.jpg" width="30%"></img>
-<img src="https://user-images.githubusercontent.com/25641763/126036233-b0879266-001d-4589-853b-2ac3b3d4fd36.jpg" width="30%"></img>
-<img src="https://user-images.githubusercontent.com/25641763/126036234-5862de2e-03d3-4dca-9c49-1c5587e0af90.jpg" width="30%"></img> 
+<img src="https://user-images.githubusercontent.com/25641763/126058268-044485d4-63e9-4bb3-849f-e02bf596141a.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058280-61004309-34e4-4797-936c-fa9a7b29fd2f.jpg" width="18%"></img> 
+<img src="https://user-images.githubusercontent.com/25641763/126058267-228b30ad-8369-4b4f-ae73-1000998c87fd.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058276-7812ee80-ae94-4a0c-9a9f-467415c636cc.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058277-91e72dc4-b567-4bc9-9661-3183ae698c62.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058270-4b7786c8-22f2-4c34-8e24-738b75de6693.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058275-4a14c3b8-0790-4455-905f-cef5a492864c.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058272-28a84e00-11a3-47b9-9faa-4d088bb3366e.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058279-a57d5afe-eb35-4aa3-844c-fc2d3b9c0956.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058265-9b0435ff-1ca4-47f4-ab83-1de22947a9b9.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058266-060af9a2-ac7f-478a-9884-fe73f7bc15ee.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058269-d70edc57-e949-4b5f-a53a-4bb3c05325ee.jpg" width="18%"></img>
+<img src="https://user-images.githubusercontent.com/25641763/126058281-d00ad4a5-0764-4471-9bca-edfd95d1fa65.jpg" width="18%"></img> 
 
 **Features of offline version:**
 1. It can schedule alarms for medicine information entered via AddNewMedicine screen. 
